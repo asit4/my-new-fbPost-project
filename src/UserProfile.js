@@ -14,8 +14,6 @@ const UserProfile = () => {
 
   const searchQuery = useDebounce(searchGif);
 
-  const divRef = useRef(null);
-
   useEffect(() => {
     axios
       .get(
@@ -32,23 +30,6 @@ const UserProfile = () => {
         console.log(error);
       });
   }, [searchQuery]);
-
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://dev-widget.konfhub.com/widget.js";
-    script.async = true;
-    script.setAttribute("button_id", "dev_btn_b517160e1b01");
-
-    if (divRef.current) {
-      divRef.current.appendChild(script); // Attach script to that specific div
-    }
-
-    return () => {
-      if (divRef.current) {
-        divRef.current.removeChild(script); // Cleanup
-      }
-    };
-  }, []);
 
   return (
     <div
@@ -118,7 +99,6 @@ const UserProfile = () => {
           </Toast.Body>
         </Toast>
       </div>
-      <div ref={divRef}></div>
       <div style={{ marginTop: 20, width: "40%", height: 500 }}>
         {postList.length > 0 ? (
           postList?.map((each, index) => (
