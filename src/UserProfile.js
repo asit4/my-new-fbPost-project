@@ -99,7 +99,7 @@ const UserProfile = () => {
           </Toast.Body>
         </Toast>
       </div>
-      <div><script src=https://dev-widget.konfhub.com/widget.js button_id="dev_btn_b517160e1b01"></script></div>
+      <div><script src="https://dev-widget.konfhub.com/widget.js" button_id="dev_btn_b517160e1b01"></script></div>
       <div style={{ marginTop: 20, width: "40%", height: 500 }}>
         {postList.length > 0 ? (
           postList?.map((each, index) => (
