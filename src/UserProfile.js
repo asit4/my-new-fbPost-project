@@ -31,6 +31,20 @@ const UserProfile = () => {
       });
   }, [searchQuery]);
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://dev-widget.konfhub.com/widget.js";
+    script.async = true;
+    script.setAttribute("button_id", "dev_btn_b517160e1b01");
+
+    document.body.appendChild(script);
+
+    return () => {
+      // Cleanup: remove the script if component unmounts
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <div
       style={{
@@ -99,7 +113,6 @@ const UserProfile = () => {
           </Toast.Body>
         </Toast>
       </div>
-      <div><script src="https://dev-widget.konfhub.com/widget.js" button_id="dev_btn_b517160e1b01"></script></div>
       <div style={{ marginTop: 20, width: "40%", height: 500 }}>
         {postList.length > 0 ? (
           postList?.map((each, index) => (
