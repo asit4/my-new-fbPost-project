@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Toast, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import CardComponent from "./components/CardComponent";
@@ -13,6 +13,8 @@ const UserProfile = () => {
   const [msg, setMsg] = useState({ text: "", img: "" });
 
   const searchQuery = useDebounce(searchGif);
+
+  const divRef = useRef(null);
 
   useEffect(() => {
     axios
@@ -37,11 +39,14 @@ const UserProfile = () => {
     script.async = true;
     script.setAttribute("button_id", "dev_btn_b517160e1b01");
 
-    document.body.appendChild(script);
+    if (divRef.current) {
+      divRef.current.appendChild(script); // Attach script to that specific div
+    }
 
     return () => {
-      // Cleanup: remove the script if component unmounts
-      document.body.removeChild(script);
+      if (divRef.current) {
+        divRef.current.removeChild(script); // Cleanup
+      }
     };
   }, []);
 
@@ -113,6 +118,7 @@ const UserProfile = () => {
           </Toast.Body>
         </Toast>
       </div>
+      <div ref={divRef}></div>
       <div style={{ marginTop: 20, width: "40%", height: 500 }}>
         {postList.length > 0 ? (
           postList?.map((each, index) => (
